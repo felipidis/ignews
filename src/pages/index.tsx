@@ -4,7 +4,7 @@ import { SubscribeButton } from '../components/SubscribeButton'
 
 import styles from './home.module.scss'
 
-const Home: NextPage = () => {
+export default function Home() {
   return (
     <>
       <Head>
@@ -31,4 +31,4 @@ const Home: NextPage = () => {
   )
 }
 
-export default Home
+export const getServerSideProps = async () => ({ })

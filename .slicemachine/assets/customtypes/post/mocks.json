@@ -1,0 +1,29 @@
+{
+  "id": "mock-doc-id",
+  "url": null,
+  "type": "post",
+  "href": null,
+  "tags": [],
+  "first_publication_date": "1970-01-01T00:00:01+0000",
+  "last_publication_date": "1970-01-01T00:00:01+0000",
+  "slugs": [],
+  "linked_documents": [],
+  "lang": "en-us",
+  "alternate_languages": [],
+  "data": {
+    "title": [
+      {
+        "type": "heading1",
+        "text": "Driving",
+        "spans": []
+      }
+    ],
+    "content": [
+      {
+        "type": "paragraph",
+        "text": "Aute voluptate dolore ut ea et enim culpa velit consequat dolor sint mollit Lorem elit. Duis nostrud eiusmod nulla est. Nisi minim sunt sint officia non elit exercitation ad laborum anim ipsum exercitation in.",
+        "spans": []
+      }
+    ]
+  }
+}

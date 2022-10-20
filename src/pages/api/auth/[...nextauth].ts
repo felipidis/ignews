@@ -1,5 +1,5 @@
 import { query as q } from 'faunadb'
-import NextAuth from 'next-auth'
+import NextAuth, { Session } from 'next-auth'
 import GithubProvider from 'next-auth/providers/github'
 import { fauna } from '../../../services/fauna'
 
@@ -14,7 +14,37 @@ export default NextAuth({
     // ...add more providers here
   ],
   callbacks: {
-    async signIn({ user, account, profile }) {
+    async session(params: { session: Session }) {
+      try {
+        const userActiveSubscription = await fauna.query(
+          q.Get(
+            q.Intersection(
+              q.Match(
+                q.Index('subscription_by_user_ref'),
+                q.Select(
+                  'ref',
+                  q.Get(
+                    q.Match(
+                      q.Index('user_by_email'),
+                      q.Casefold(params.session.user?.email!)
+                    )
+                  )
+                )
+              ),
+              q.Match(q.Index('subscription_by_status'), 'active')
+            )
+          )
+        )
+        return { ...params.session, activeSubscription: userActiveSubscription }
+      } catch {
+        return {
+          ...params.session,
+          activeSubscription: null,
+        }
+      }
+    },
+
+    async signIn({ user }) {
       const { email } = user
       try {
         await fauna.query(
